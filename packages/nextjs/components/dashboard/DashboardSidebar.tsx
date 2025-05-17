@@ -16,6 +16,7 @@ import {
   ArrowRightOnRectangleIcon
 } from "@heroicons/react/24/outline";
 import { Address, FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { SwitchTheme } from "~~/components/SwitchTheme";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth";
 import { useAccount } from "wagmi";
 
@@ -69,8 +70,8 @@ export const DashboardSidebar = () => {
       <div className="mb-8">
         <Link href="/" passHref className="flex items-center gap-3 mb-6 px-2">
           <div className="flex relative w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-secondary p-0.5 shadow-md">
-            <div className="bg-base-100 rounded-lg w-full h-full flex items-center justify-center">
-              <Image alt="Logo" className="cursor-pointer w-8 h-8" width={32} height={32} src="/logo.svg" />
+            <div className="bg-base-100 rounded-lg w-full h-full flex items-center justify-center overflow-hidden">
+              <Image alt="Logo" className="cursor-pointer w-10 h-10 object-contain" width={40} height={40} src="/bar-logo.png" />
             </div>
           </div>
           <div className="flex flex-col">
@@ -108,10 +109,13 @@ export const DashboardSidebar = () => {
         </ul>
       </nav>
       <div className="mt-auto pt-4 border-t border-base-300/30">
-        <button className="flex w-full items-center gap-3 px-4 py-3 mx-2 rounded-xl text-base text-base-content/70 hover:bg-base-300/50 hover:text-base-content transition-colors">
-          <ArrowRightOnRectangleIcon className="w-5 h-5" />
-          Logout
-        </button>
+        <div className="flex items-center justify-between px-2">
+          <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-base text-base-content/70 hover:bg-base-300/50 hover:text-base-content transition-colors">
+            <ArrowRightOnRectangleIcon className="w-5 h-5" />
+            Logout
+          </button>
+          <SwitchTheme />
+        </div>
       </div>
     </aside>
   );
