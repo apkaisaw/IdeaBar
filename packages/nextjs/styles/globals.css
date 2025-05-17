@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Iceland';
+  src: url('/fonts/Iceland-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --shadow-center: 0 0 12px -2px rgb(0 0 0 / 0.05);
   --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -80,12 +88,19 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+  html {
+    font-size: 18px;
+  }
+
   p {
     margin: 1rem 0;
+    font-size: 1.2rem;
   }
 
   body {
     min-height: 100vh;
+    font-family: 'Iceland', sans-serif;
+    font-size: 1.25rem;
   }
 
   h1,
@@ -94,6 +109,76 @@
   h4 {
     margin-bottom: 0.5rem;
     line-height: 1;
+    font-family: 'Iceland', sans-serif;
+  }
+
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.5rem; }
+
+  .btn {
+    font-size: 1.2rem;
+  }
+
+  input, select, textarea {
+    font-size: 1.2rem;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  table, th, td {
+    font-size: 1.2rem;
+  }
+
+  li {
+    font-size: 1.2rem;
+  }
+
+  small, .text-sm {
+    font-size: 1rem;
+  }
+
+  code, pre {
+    font-size: 1.15rem;
+  }
+
+  .card, .card-body, .card-title, .card-actions {
+    font-size: 1.2rem;
+  }
+
+  .card .text-xs, 
+  .card .text-sm,
+  .card .text-base,
+  .card span,
+  .card div,
+  .card p,
+  .card a {
+    font-size: 1.2rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .card .badge,
+  .card .label-text,
+  .card .text-xs {
+    font-size: 1rem;
+  }
+
+  .text-xs { font-size: 1rem !important; }
+  .text-sm { font-size: 1.1rem !important; }
+  .text-base { font-size: 1.2rem !important; }
+  .text-lg { font-size: 1.3rem !important; }
+  .text-xl { font-size: 1.5rem !important; }
+  .text-2xl { font-size: 1.7rem !important; }
+  
+  /* 页脚文本大小特殊调整 */
+  footer, footer * {
+    font-size: 0.85rem !important;
   }
 }
 
