@@ -5,11 +5,10 @@ import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWrite
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
 import { Address } from "~~/components/scaffold-eth";
 
-export const ChatInterface = () => {
+export const Chat = () => {
   const [message, setMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [selectedContact, setSelectedContact] = useState("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
-  const [activeTab, setActiveTab] = useState("human");
   
   // Mock data - in real app would come from contract
   const contacts = [
@@ -47,26 +46,6 @@ export const ChatInterface = () => {
     }
   ];
 
-  // IdeaBot数据
-  const ideaBot = {
-    address: "0xIdeaBot",
-    name: "IdeaBot AI",
-    lastMessage: "I can analyze trends and create tasks for you",
-    unread: 0,
-    avatar: "https://api.dicebear.com/6.x/bottts/svg?seed=IdeaBot",
-    status: "online"
-  };
-
-  // IdeaBot对话数据
-  const ideaBotConversation = [
-    { sender: "0xIdeaBot", text: "Hello! I'm IdeaBot. I can help create tasks based on your skills and market trends.", timestamp: "10:00 AM" },
-    { sender: "0xIdeaBot", text: "What skills do you have? For example: design, development, writing, etc.", timestamp: "10:00 AM" },
-    { sender: "me", text: "I'm skilled in frontend development and UI design", timestamp: "10:02 AM" },
-    { sender: "0xIdeaBot", text: "Great! Based on current trend analysis, I found these directions with high potential:", timestamp: "10:03 AM" },
-    { sender: "0xIdeaBot", text: "1. Data visualization interface design for DeFi projects\n2. Responsive frontend development for NFT marketplaces\n3. UI/UX optimization for DAO voting systems", timestamp: "10:03 AM" },
-    { sender: "0xIdeaBot", text: "Which direction interests you most? I can generate specific tasks for you.", timestamp: "10:04 AM" },
-  ];
-
   // Mock conversation data
   const conversations = {
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": [
@@ -89,8 +68,7 @@ export const ChatInterface = () => {
       { sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906", text: "Just wanted to let you know that the ZK-proof task deadline has been extended by a week.", timestamp: "2 days ago" },
       { sender: "me", text: "That's great news, thanks for letting me know!", timestamp: "2 days ago" },
       { sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906", text: "The deadline has been extended", timestamp: "Yesterday" },
-    ],
-    "0xIdeaBot": ideaBotConversation
+    ]
   };
 
   // Mock contract write
@@ -120,40 +98,6 @@ export const ChatInterface = () => {
         newMessage
       ];
       
-      // 如果是发给IdeaBot的消息，模拟AI回复
-      if (selectedContact === "0xIdeaBot") {
-        setTimeout(() => {
-          const botResponse = {
-            sender: "0xIdeaBot",
-            text: "Analyzing your request, please wait...",
-            timestamp: "Just now"
-          };
-          
-          conversations[selectedContact] = [
-            ...conversations[selectedContact],
-            botResponse
-          ];
-          
-          // 2秒后再回复一条
-          setTimeout(() => {
-            const taskSuggestion = {
-              sender: "0xIdeaBot",
-              text: "Based on your skills and current market demand, I recommend creating this task:\n\n\"Design a data visualization dashboard for DeFi liquidity pools\"\n\nThis task is in high demand, with estimated compensation of 200-300 IDEA. Would you like to create this task?",
-              timestamp: "Just now"
-            };
-            
-            conversations[selectedContact] = [
-              ...conversations[selectedContact],
-              taskSuggestion
-            ];
-            
-            scrollToBottom();
-          }, 2000);
-          
-          scrollToBottom();
-        }, 1000);
-      }
-      
       setMessage("");
       scrollToBottom();
     } catch (error) {
@@ -170,9 +114,12 @@ export const ChatInterface = () => {
   }, [selectedContact, conversations]);
 
   return (
-    <div className="w-full h-[calc(100vh-8rem)] flex flex-col">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-base-300/10 to-base-300/5">
+      {/* 深色背景覆盖 */}
+      <div className="fixed inset-0 bg-black/80 -z-10"></div>
+      
       {/* SVG Background with patterns */}
-      <div className="fixed top-0 left-0 w-full h-full -z-5 opacity-10 pointer-events-none">
+      <div className="fixed top-0 left-0 w-full h-full -z-5 opacity-10">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -196,55 +143,28 @@ export const ChatInterface = () => {
       </div>
       
       {/* 装饰光效 */}
-      <div className="fixed top-0 left-[10%] w-[35%] h-[40vh] bg-blue-600/20 blur-[120px] rounded-full -z-1 pointer-events-none"></div>
-      <div className="fixed top-[20%] right-[10%] w-[25%] h-[30vh] bg-indigo-600/20 blur-[100px] rounded-full -z-1 pointer-events-none"></div>
-      <div className="fixed bottom-[10%] left-[20%] w-[30%] h-[30vh] bg-purple-600/20 blur-[100px] rounded-full -z-1 pointer-events-none"></div>
+      <div className="fixed top-0 left-[10%] w-[35%] h-[40vh] bg-blue-600/20 blur-[120px] rounded-full -z-1"></div>
+      <div className="fixed top-[20%] right-[10%] w-[25%] h-[30vh] bg-indigo-600/20 blur-[100px] rounded-full -z-1"></div>
+      <div className="fixed bottom-[10%] left-[20%] w-[30%] h-[30vh] bg-purple-600/20 blur-[100px] rounded-full -z-1"></div>
 
-      <div className="w-full h-full flex flex-col overflow-hidden">
-        <div className="flex-1 flex flex-col md:flex-row gap-3 h-full">
+      <div className="w-full h-screen flex flex-col pt-4 pb-4 px-4 sm:px-6 relative max-w-7xl mx-auto">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-bold">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-300 font-extrabold">
+              IdeaBar Messages
+            </span>
+          </h1>
+        </div>
+        
+        <div className="flex-1 flex flex-col md:flex-row gap-4 overflow-hidden">
           {/* Contact List */}
-          <div className="w-full md:w-1/3 lg:w-1/4 h-full">
-            <div className="relative h-full flex flex-col">
+          <div className="w-full md:w-1/3 lg:w-1/4">
+            <div className="relative h-full">
               <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-indigo-900/10 rounded-2xl"></div>
               <div className="absolute inset-0 border border-indigo-500/20 rounded-2xl"></div>
               
-              <div className="relative p-3 z-10 backdrop-blur-sm h-full flex flex-col">
-                {/* 联系人类型选择 */}
-                <div className="mb-3">
-                  <div className="relative p-1 rounded-xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/30 rounded-xl"></div>
-                    <div className="absolute inset-0 border border-purple-500/20 rounded-xl"></div>
-                    
-                    <div className="relative flex z-10 backdrop-blur-sm">
-                      <button
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex-1 ${
-                          activeTab === "human" 
-                            ? "bg-purple-600/60 text-white" 
-                            : "bg-transparent text-gray-400 hover:text-gray-200"
-                        }`}
-                        onClick={() => setActiveTab("human")}
-                      >
-                        Human Contacts
-                      </button>
-                      <button
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex-1 ${
-                          activeTab === "ai" 
-                            ? "bg-cyan-600/60 text-white" 
-                            : "bg-transparent text-gray-400 hover:text-gray-200"
-                        }`}
-                        onClick={() => {
-                          setActiveTab("ai");
-                          setSelectedContact("0xIdeaBot");
-                        }}
-                      >
-                        IdeaBot AI
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* 搜索栏 */}
-                <div className="mb-3">
+              <div className="relative p-4 z-10 backdrop-blur-sm h-full flex flex-col">
+                <div className="mb-4">
                   <div className="relative">
                     <input
                       type="text"
@@ -257,81 +177,52 @@ export const ChatInterface = () => {
                   </div>
                 </div>
                 
-                {/* 联系人列表 */}
-                <div className="flex-1 overflow-y-auto scrollbar-hide pr-1" style={{ scrollbarWidth: 'none', maxHeight: 'calc(100% - 100px)' }}>
+                <div className="flex-1 overflow-y-auto scrollbar-hide pr-1" style={{ scrollbarWidth: 'none' }}>
                   <div className="space-y-2">
-                    {activeTab === "ai" ? (
+                    {contacts.map((contact) => (
                       <div
-                        className={`p-3 rounded-xl cursor-pointer transition-all duration-200 relative group hover:scale-[1.02] bg-cyan-600/30 border border-cyan-400/30`}
-                        onClick={() => setSelectedContact("0xIdeaBot")}
+                        key={contact.address}
+                        className={`p-3 rounded-xl cursor-pointer transition-all duration-200 relative group hover:scale-[1.02] ${
+                          selectedContact === contact.address
+                            ? "bg-indigo-600/30 border border-indigo-400/30"
+                            : "bg-gray-800/40 border border-gray-700/40 hover:bg-gray-700/40"
+                        }`}
+                        onClick={() => setSelectedContact(contact.address)}
                       >
                         <div className="flex items-start gap-3">
                           <div className="relative">
                             <img
-                              src={ideaBot.avatar}
-                              alt={ideaBot.name}
+                              src={contact.avatar}
+                              alt={contact.name}
                               className="w-10 h-10 rounded-full bg-gray-700"
                             />
-                            <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-gray-800 bg-green-500"></div>
+                            <div className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-gray-800 ${
+                              contact.status === 'online' ? 'bg-green-500' :
+                              contact.status === 'away' ? 'bg-yellow-500' : 'bg-gray-500'
+                            }`}></div>
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex justify-between items-start">
-                              <h3 className="font-medium text-white truncate">{ideaBot.name}</h3>
-                              <span className="text-xs text-cyan-300 whitespace-nowrap">
-                                AI Assistant
+                              <h3 className="font-medium text-white truncate">{contact.name}</h3>
+                              <span className="text-xs text-gray-400 whitespace-nowrap">
+                                {/* Mock time */}
+                                {contact.address === "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" ? "10:45 AM" :
+                                 contact.address === "0x70997970C51812dc3A010C7d01b50e0d17dc79C8" ? "Yesterday" :
+                                 contact.address === "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC" ? "Monday" : "2d ago"}
                               </span>
                             </div>
                             <div className="flex justify-between items-center mt-1">
-                              <p className="text-sm text-gray-400 truncate">{ideaBot.lastMessage}</p>
+                              <p className="text-sm text-gray-400 truncate">{contact.lastMessage}</p>
+                              {contact.unread > 0 && (
+                                <span className="flex items-center justify-center min-w-[20px] h-5 rounded-full bg-indigo-600 text-white text-xs font-medium">
+                                  {contact.unread}
+                                </span>
+                              )}
                             </div>
                           </div>
                         </div>
                       </div>
-                    ) : (
-                      contacts.map((contact) => (
-                        <div
-                          key={contact.address}
-                          className={`p-3 rounded-xl cursor-pointer transition-all duration-200 relative group hover:scale-[1.02] ${
-                            selectedContact === contact.address
-                              ? "bg-indigo-600/30 border border-indigo-400/30"
-                              : "bg-gray-800/40 border border-gray-700/40 hover:bg-gray-700/40"
-                          }`}
-                          onClick={() => setSelectedContact(contact.address)}
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className="relative">
-                              <img
-                                src={contact.avatar}
-                                alt={contact.name}
-                                className="w-10 h-10 rounded-full bg-gray-700"
-                              />
-                              <div className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-gray-800 ${
-                                contact.status === 'online' ? 'bg-green-500' :
-                                contact.status === 'away' ? 'bg-yellow-500' : 'bg-gray-500'
-                              }`}></div>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex justify-between items-start">
-                                <h3 className="font-medium text-white truncate">{contact.name}</h3>
-                                <span className="text-xs text-gray-400 whitespace-nowrap">
-                                  {contact.address === "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" ? "10:45 AM" :
-                                  contact.address === "0x70997970C51812dc3A010C7d01b50e0d17dc79C8" ? "Yesterday" :
-                                  contact.address === "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC" ? "Monday" : "2d ago"}
-                                </span>
-                              </div>
-                              <div className="flex justify-between items-center mt-1">
-                                <p className="text-sm text-gray-400 truncate">{contact.lastMessage}</p>
-                                {contact.unread > 0 && (
-                                  <span className="flex items-center justify-center min-w-[20px] h-5 rounded-full bg-indigo-600 text-white text-xs font-medium">
-                                    {contact.unread}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>
@@ -339,50 +230,39 @@ export const ChatInterface = () => {
           </div>
           
           {/* Chat Area */}
-          <div className="flex-1 h-full">
+          <div className="flex-1 flex flex-col">
             <div className="relative h-full flex flex-col">
               <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-indigo-900/10 rounded-2xl"></div>
               <div className="absolute inset-0 border border-indigo-500/20 rounded-2xl"></div>
               
               {/* Chat Header */}
-              <div className="relative z-10 p-3 border-b border-indigo-500/20 backdrop-blur-sm flex-shrink-0">
+              <div className="relative z-10 p-4 border-b border-indigo-500/20 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
                   <img
-                    src={selectedContact === "0xIdeaBot" ? ideaBot.avatar : contacts.find(c => c.address === selectedContact)?.avatar}
-                    alt={selectedContact === "0xIdeaBot" ? ideaBot.name : contacts.find(c => c.address === selectedContact)?.name}
+                    src={contacts.find(c => c.address === selectedContact)?.avatar}
+                    alt={contacts.find(c => c.address === selectedContact)?.name}
                     className="w-10 h-10 rounded-full bg-gray-700"
                   />
                   <div className="flex-1">
                     <h3 className="font-medium text-white">
-                      {selectedContact === "0xIdeaBot" ? ideaBot.name : contacts.find(c => c.address === selectedContact)?.name}
+                      {contacts.find(c => c.address === selectedContact)?.name}
                     </h3>
                     <div className="flex items-center gap-1">
-                      {selectedContact === "0xIdeaBot" ? (
-                        <>
-                          <div className="w-2 h-2 rounded-full bg-cyan-500"></div>
-                          <span className="text-xs text-cyan-400">AI Assistant</span>
-                          <span className="text-gray-500 mx-1">•</span>
-                          <span className="text-xs text-gray-400">Can analyze trends and create tasks</span>
-                        </>
-                      ) : (
-                        <>
-                          <div className={`w-2 h-2 rounded-full ${
-                            contacts.find(c => c.address === selectedContact)?.status === 'online' ? 'bg-green-500' :
-                            contacts.find(c => c.address === selectedContact)?.status === 'away' ? 'bg-yellow-500' : 'bg-gray-500'
-                          }`}></div>
-                          <span className="text-xs text-gray-400">
-                            {contacts.find(c => c.address === selectedContact)?.status === 'online' ? 'Online' :
-                             contacts.find(c => c.address === selectedContact)?.status === 'away' ? 'Away' : 'Offline'}
-                          </span>
-                          <span className="text-gray-500 mx-1">•</span>
-                          <Address
-                            address={selectedContact}
-                            size="xs"
-                            format="short"
-                            className="text-xs text-gray-400"
-                          />
-                        </>
-                      )}
+                      <div className={`w-2 h-2 rounded-full ${
+                        contacts.find(c => c.address === selectedContact)?.status === 'online' ? 'bg-green-500' :
+                        contacts.find(c => c.address === selectedContact)?.status === 'away' ? 'bg-yellow-500' : 'bg-gray-500'
+                      }`}></div>
+                      <span className="text-xs text-gray-400">
+                        {contacts.find(c => c.address === selectedContact)?.status === 'online' ? 'Online' :
+                         contacts.find(c => c.address === selectedContact)?.status === 'away' ? 'Away' : 'Offline'}
+                      </span>
+                      <span className="text-gray-500 mx-1">•</span>
+                      <Address
+                        address={selectedContact}
+                        size="xs"
+                        format="short"
+                        className="text-xs text-gray-400"
+                      />
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -406,7 +286,7 @@ export const ChatInterface = () => {
               </div>
               
               {/* Messages */}
-              <div className="relative z-10 flex-1 p-3 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none', maxHeight: 'calc(100% - 130px)' }}>
+              <div className="relative z-10 flex-1 p-4 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
                 <div className="space-y-3">
                   {conversations[selectedContact]?.map((msg, idx) => (
                     <div
@@ -417,7 +297,7 @@ export const ChatInterface = () => {
                         {msg.sender !== "me" && idx > 0 && conversations[selectedContact][idx-1].sender !== msg.sender && (
                           <div className="absolute -left-12 top-1">
                             <img
-                              src={selectedContact === "0xIdeaBot" ? ideaBot.avatar : contacts.find(c => c.address === selectedContact)?.avatar}
+                              src={contacts.find(c => c.address === selectedContact)?.avatar}
                               alt="avatar"
                               className="w-8 h-8 rounded-full bg-gray-700"
                             />
@@ -427,15 +307,11 @@ export const ChatInterface = () => {
                         <div className={`p-3 rounded-2xl ${
                           msg.sender === "me"
                             ? "bg-indigo-600/40 border border-indigo-400/30 text-white"
-                            : msg.sender === "0xIdeaBot"
-                              ? "bg-cyan-800/40 border border-cyan-500/30 text-gray-200"
-                              : "bg-gray-800/60 border border-gray-700/40 text-gray-200"
+                            : "bg-gray-800/60 border border-gray-700/40 text-gray-200"
                         }`}>
-                          <p className="whitespace-pre-line">{msg.text}</p>
+                          <p>{msg.text}</p>
                           <div className={`text-xs mt-1 ${
-                            msg.sender === "me" ? "text-indigo-200/70" : 
-                            msg.sender === "0xIdeaBot" ? "text-cyan-200/70" : 
-                            "text-gray-400"
+                            msg.sender === "me" ? "text-indigo-200/70" : "text-gray-400"
                           } flex justify-between items-center`}>
                             <span>{msg.timestamp}</span>
                             {msg.sender === "me" && (
@@ -444,18 +320,6 @@ export const ChatInterface = () => {
                               </svg>
                             )}
                           </div>
-                          
-                          {/* 为IdeaBot回复添加任务创建按钮 */}
-                          {msg.sender === "0xIdeaBot" && msg.text.includes("Would you like to create this task?") && (
-                            <div className="mt-2 flex gap-2">
-                              <button className="px-3 py-1 bg-cyan-600/70 hover:bg-cyan-500/70 text-white rounded-lg text-sm transition-colors">
-                                Create Task
-                              </button>
-                              <button className="px-3 py-1 bg-gray-800/70 hover:bg-gray-700/70 text-gray-300 rounded-lg text-sm transition-colors">
-                                Modify Task
-                              </button>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -465,7 +329,7 @@ export const ChatInterface = () => {
               </div>
               
               {/* Input Area */}
-              <div className="relative z-10 p-3 border-t border-indigo-500/20 backdrop-blur-sm flex-shrink-0">
+              <div className="relative z-10 p-4 border-t border-indigo-500/20 backdrop-blur-sm">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -486,7 +350,7 @@ export const ChatInterface = () => {
                       type="text"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder={selectedContact === "0xIdeaBot" ? "Tell IdeaBot about your skills and interests..." : "Type a message..."}
+                      placeholder="Type a message..."
                       className="w-full py-2 px-4 bg-gray-900/40 border border-indigo-500/20 rounded-lg text-gray-200 focus:outline-none focus:border-indigo-400/40 placeholder-gray-500"
                     />
                     <button
@@ -500,10 +364,10 @@ export const ChatInterface = () => {
                   </div>
                   <button
                     type="submit"
-                    className={`p-2 ${selectedContact === "0xIdeaBot" ? "bg-cyan-600/60 hover:bg-cyan-500/70" : "bg-indigo-600/60 hover:bg-indigo-500/70"} text-white rounded-lg transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group/btn`}
+                    className="p-2 bg-indigo-600/60 hover:bg-indigo-500/70 text-white rounded-lg transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group/btn"
                     disabled={isLoading || !message.trim()}
                   >
-                    <div className={`absolute inset-0 ${selectedContact === "0xIdeaBot" ? "bg-gradient-to-r from-cyan-600/40 to-blue-600/40" : "bg-gradient-to-r from-indigo-600/40 to-blue-600/40"} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/40 to-blue-600/40 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative z-10">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

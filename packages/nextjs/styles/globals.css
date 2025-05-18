@@ -13,6 +13,28 @@
   --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+:root {
+  /* 亮模式下的颜色变量 */
+  --primary: #4F46E5;
+  --secondary: #06B6D4;
+  --accent: #10B981;
+  --bg-light: #F8FAFC;
+  
+  /* 渐变色变量 */
+  --neon-volt: #8B5CF6;
+  --plasma-bolt: #3B82F6;
+  --neo-green: #14F195;
+}
+
+[data-theme="dark"] {
+  /* 暗模式下的颜色变量 */
+  --primary: #8B5CF6;
+  --secondary: #3B82F6;
+  --accent: #14F195;
+  --bg-dark: #0F172A;
+  --bg-dark-secondary: #1E293B;
+}
+
 @plugin "daisyui" {
   themes:
     light,
@@ -22,20 +44,20 @@
 @plugin "daisyui/theme" {
   name: "light";
 
-  --color-primary: #93bbfb;
+  --color-primary: var(--primary);
   --color-primary-content: #212638;
-  --color-secondary: #dae8ff;
+  --color-secondary: var(--secondary);
   --color-secondary-content: #212638;
-  --color-accent: #93bbfb;
+  --color-accent: var(--accent);
   --color-accent-content: #212638;
   --color-neutral: #212638;
   --color-neutral-content: #ffffff;
   --color-base-100: #ffffff;
-  --color-base-200: #f4f8ff;
+  --color-base-200: var(--bg-light);
   --color-base-300: #dae8ff;
   --color-base-content: #212638;
-  --color-info: #93bbfb;
-  --color-success: #34eeb6;
+  --color-info: var(--secondary);
+  --color-success: var(--accent);
   --color-warning: #ffcf72;
   --color-error: #ff8863;
 
@@ -47,20 +69,20 @@
 @plugin "daisyui/theme" {
   name: "dark";
 
-  --color-primary: #212638;
+  --color-primary: var(--primary);
   --color-primary-content: #f9fbff;
-  --color-secondary: #323f61;
+  --color-secondary: var(--secondary);
   --color-secondary-content: #f9fbff;
-  --color-accent: #4969a6;
+  --color-accent: var(--accent);
   --color-accent-content: #f9fbff;
   --color-neutral: #f9fbff;
   --color-neutral-content: #385183;
-  --color-base-100: #385183;
-  --color-base-200: #2a3655;
+  --color-base-100: var(--bg-dark);
+  --color-base-200: var(--bg-dark-secondary);
   --color-base-300: #212638;
   --color-base-content: #f9fbff;
-  --color-info: #385183;
-  --color-success: #34eeb6;
+  --color-info: var(--secondary);
+  --color-success: var(--accent);
   --color-warning: #ffcf72;
   --color-error: #ff8863;
 
@@ -180,6 +202,32 @@
   footer, footer * {
     font-size: 0.85rem !important;
   }
+}
+
+/* 渐变文本类 */
+.text-gradient-primary {
+  background: linear-gradient(135deg, var(--neon-volt), #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-secondary {
+  background: linear-gradient(135deg, var(--plasma-bolt), #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Tailwind渐变文本类的补充 */
+.bg-gradient-text {
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 :root,
