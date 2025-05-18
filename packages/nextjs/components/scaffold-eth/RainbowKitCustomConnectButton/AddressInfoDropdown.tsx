@@ -46,21 +46,45 @@ export const AddressInfoDropdown = ({
 
   useOutsideClick(dropdownRef, closeDropdown);
 
+  // 紫色半透明主题样式
+  const purpleStyle = {
+    summary: {
+      backgroundColor: 'rgba(123, 63, 228, 0.7)',
+      borderColor: 'rgba(147, 87, 252, 0.5)',
+      boxShadow: '0 4px 6px rgba(123, 63, 228, 0.2)'
+    },
+    dropdownContent: {
+      backgroundColor: 'rgba(30, 10, 60, 0.85)',
+      backdropFilter: 'blur(8px)',
+      border: '1px solid rgba(147, 87, 252, 0.3)'
+    },
+    menuItem: {
+      hoverBg: 'rgba(147, 87, 252, 0.2)'
+    }
+  };
+
   return (
     <>
       <details ref={dropdownRef} className="dropdown dropdown-end leading-3">
-        <summary className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md dropdown-toggle gap-0 h-auto!">
+        <summary 
+          className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md dropdown-toggle gap-0 h-auto! backdrop-blur-sm"
+          style={purpleStyle.summary}
+        >
           <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
           <span className="ml-2 mr-1">
             {isENS(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
           </span>
           <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
         </summary>
-        <ul className="dropdown-content menu z-2 p-2 mt-2 shadow-center shadow-accent bg-base-200 rounded-box gap-1">
+        <ul 
+          className="dropdown-content menu z-2 p-2 mt-2 shadow-center shadow-accent rounded-box gap-1"
+          style={purpleStyle.dropdownContent}
+        >
           <NetworkOptions hidden={!selectingNetwork} />
           <li className={selectingNetwork ? "hidden" : ""}>
             <div
-              className="h-8 btn-sm rounded-xl! flex gap-3 py-3 cursor-pointer"
+              className="h-8 btn-sm rounded-xl! flex gap-3 py-3 cursor-pointer hover:bg-opacity-20"
+              style={{ hover: purpleStyle.menuItem.hoverBg }}
               onClick={() => copyAddressToClipboard(checkSumAddress)}
             >
               {isAddressCopiedToClipboard ? (
@@ -77,13 +101,13 @@ export const AddressInfoDropdown = ({
             </div>
           </li>
           <li className={selectingNetwork ? "hidden" : ""}>
-            <label htmlFor="qrcode-modal" className="h-8 btn-sm rounded-xl! flex gap-3 py-3">
+            <label htmlFor="qrcode-modal" className="h-8 btn-sm rounded-xl! flex gap-3 py-3 hover:bg-opacity-20">
               <QrCodeIcon className="h-6 w-4 ml-2 sm:ml-0" />
               <span className="whitespace-nowrap">View QR Code</span>
             </label>
           </li>
           <li className={selectingNetwork ? "hidden" : ""}>
-            <button className="h-8 btn-sm rounded-xl! flex gap-3 py-3" type="button">
+            <button className="h-8 btn-sm rounded-xl! flex gap-3 py-3 hover:bg-opacity-20" type="button">
               <ArrowTopRightOnSquareIcon className="h-6 w-4 ml-2 sm:ml-0" />
               <a
                 target="_blank"
@@ -98,7 +122,7 @@ export const AddressInfoDropdown = ({
           {allowedNetworks.length > 1 ? (
             <li className={selectingNetwork ? "hidden" : ""}>
               <button
-                className="h-8 btn-sm rounded-xl! flex gap-3 py-3"
+                className="h-8 btn-sm rounded-xl! flex gap-3 py-3 hover:bg-opacity-20"
                 type="button"
                 onClick={() => {
                   setSelectingNetwork(true);
@@ -110,7 +134,7 @@ export const AddressInfoDropdown = ({
           ) : null}
           <li className={selectingNetwork ? "hidden" : ""}>
             <button
-              className="menu-item text-error h-8 btn-sm rounded-xl! flex gap-3 py-3"
+              className="menu-item text-error h-8 btn-sm rounded-xl! flex gap-3 py-3 hover:bg-opacity-20"
               type="button"
               onClick={() => disconnect()}
             >
