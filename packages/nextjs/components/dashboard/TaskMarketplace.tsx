@@ -1,11 +1,63 @@
 "use client";
 
 import { useState } from "react";
+import { notification } from "~~/utils/scaffold-eth";
+import { useAccount, useSignMessage } from "wagmi";
 
 export const TaskMarketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
+  const [isApplying, setIsApplying] = useState(false);
+  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+  
+  // Get the connected wallet account
+  const { address, isConnected } = useAccount();
+  
+  // 使用wagmi的signMessage钩子
+  const { signMessageAsync } = useSignMessage();
 
+  // 处理申请任务 - 调用钱包签名但不需要合约
+  const handleApplyForTask = async (taskId: number) => {
+    // Check if wallet is connected
+    if (!isConnected) {
+      notification.warning("Please connect your wallet first");
+      return;
+    }
+    
+    try {
+      setIsApplying(true);
+      setSelectedTaskId(taskId);
+      
+      notification.info("Please confirm the signature in your wallet...");
+      
+      // 创建一个签名消息
+      const messageToSign = `I am applying for task #${taskId} on IdeaBar Marketplace.\n\nTimestamp: ${new Date().toISOString()}`;
+      
+      // 请求钱包签名 - 这会弹出钱包界面
+      const signature = await signMessageAsync({ message: messageToSign });
+      
+      console.log("Task application signature:", signature);
+      console.log("Message signed:", messageToSign);
+      
+      // 签名成功
+      notification.success("Successfully signed task application!");
+      
+      // 模拟交易确认
+      setTimeout(() => {
+        const mockTxHash = "0x" + Math.random().toString(16).slice(2) + Math.random().toString(16).slice(2);
+        notification.success(`Task application confirmed! Transaction: ${mockTxHash.slice(0, 10)}...`);
+      }, 2000);
+      
+      return signature;
+    } catch (error) {
+      console.error("Signature failed:", error);
+      notification.error("Failed to sign message: " + (error as Error).message);
+    } finally {
+      setIsApplying(false);
+      setSelectedTaskId(null);
+    }
+  };
+  
   // 筛选分类
   const filters = ["All Projects", "Funding Open", "Tasks Available"];
   
@@ -302,9 +354,13 @@ export const TaskMarketplace = () => {
                       </div>
                     </div>
                     
-                    {/* 查看按钮 */}
+                    {/* 申请任务按钮 */}
                     <div className="card-actions justify-end">
-                      <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-2 px-4 py-2 transition-all duration-300 backdrop-blur-sm">
+                      <button 
+                        className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-2 px-4 py-2 transition-all duration-300 backdrop-blur-sm"
+                        onClick={() => handleApplyForTask(task.id)}
+                        disabled={isApplying && selectedTaskId === task.id || task.status === "Completed"}
+                      >
                         {/* 按钮背景光效 */}
                         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                         {/* 流光效果 */}
@@ -312,10 +368,20 @@ export const TaskMarketplace = () => {
                         {/* 边框效果 */}
                         <div className="absolute inset-0 border border-purple-400/20 rounded-lg pointer-events-none"></div>
                         
-                        <span className="text-xs z-10 relative">View Details</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 z-10 relative group-hover/btn:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
+                        <span className="text-xs z-10 relative">
+                          {isApplying && selectedTaskId === task.id ? 'Waiting for signature...' : 'Apply for Task'}
+                        </span>
+                        {!(isApplying && selectedTaskId === task.id) && (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 z-10 relative group-hover/btn:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        )}
+                        {(isApplying && selectedTaskId === task.id) && (
+                          <svg className="animate-spin h-3.5 w-3.5 text-white z-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        )}
                       </button>
                     </div>
                   </div>
