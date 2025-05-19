@@ -15,14 +15,14 @@ import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 const purpleTransparentTheme = (isDarkMode: boolean) => {
   const baseTheme = isDarkMode ? darkTheme : lightTheme;
   return baseTheme({
-    accentColor: 'rgba(123, 63, 228, 0.8)', // 紫色半透明
-    accentColorForeground: 'white',
-    borderRadius: 'medium',
-    overlayBlur: 'small', // 添加模糊效果增强半透明感
+    accentColor: "rgba(123, 63, 228, 0.8)", // 紫色半透明
+    accentColorForeground: "white",
+    borderRadius: "medium",
+    overlayBlur: "small", // 添加模糊效果增强半透明感
     // 可自定义更多主题属性
     colors: {
-      connectButtonBackground: 'rgba(123, 63, 228, 0.6)', // 紫色半透明背景
-      modalBackground: 'rgba(30, 10, 60, 0.85)', // 深紫色半透明背景
+      connectButtonBackground: "rgba(123, 63, 228, 0.6)", // 紫色半透明背景
+      modalBackground: "rgba(30, 10, 60, 0.85)", // 深紫色半透明背景
     },
   });
 };

@@ -15,7 +15,7 @@ export const CommunityShowcase = () => {
       xForwarded: true,
       isSubscribed: false,
       category: "Content",
-      skills: ["Video", "DeFi"]
+      skills: ["Video", "DeFi"],
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export const CommunityShowcase = () => {
       xForwarded: false,
       isSubscribed: true,
       category: "Design",
-      skills: ["Pixel Art", "NFT"]
+      skills: ["Pixel Art", "NFT"],
     },
     {
       id: 3,
@@ -35,7 +35,7 @@ export const CommunityShowcase = () => {
       xForwarded: true,
       isSubscribed: false,
       category: "Research",
-      skills: ["Gaming", "Analysis"]
+      skills: ["Gaming", "Analysis"],
     },
   ];
 
@@ -47,7 +47,7 @@ export const CommunityShowcase = () => {
       completedTasks: 42,
       averageScore: 93,
       isSubscribed: false,
-      category: "Development"
+      category: "Development",
     },
     {
       id: 2,
@@ -56,7 +56,7 @@ export const CommunityShowcase = () => {
       completedTasks: 28,
       averageScore: 96,
       isSubscribed: true,
-      category: "Design"
+      category: "Design",
     },
     {
       id: 3,
@@ -65,7 +65,7 @@ export const CommunityShowcase = () => {
       completedTasks: 35,
       averageScore: 91,
       isSubscribed: false,
-      category: "Content"
+      category: "Content",
     },
   ];
 
@@ -82,16 +82,19 @@ export const CommunityShowcase = () => {
                 <div className="relative rounded-2xl hover:scale-[1.01] transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
                   <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-                  
+
                   <div className="relative p-6 z-10 backdrop-blur-sm">
                     <div className="flex flex-col md:flex-row justify-between gap-4">
                       <div>
                         <h3 className="text-lg font-bold text-white">"{completion.title}"</h3>
                         <p className="text-sm text-purple-200">by {completion.creator}</p>
-                        
+
                         <div className="flex flex-wrap gap-1.5 mt-3">
                           {completion.skills.map((skill, index) => (
-                            <span key={index} className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs py-1">
+                            <span
+                              key={index}
+                              className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs py-1"
+                            >
                               {skill}
                             </span>
                           ))}
@@ -108,25 +111,27 @@ export const CommunityShowcase = () => {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex flex-wrap gap-2">
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                           <div className="absolute inset-0 border border-purple-400/20 rounded-lg pointer-events-none"></div>
                           <span className="text-xs z-10 relative">View Task</span>
                         </button>
-                        
+
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-gray-800/40 hover:bg-gray-700/50 border-none rounded-lg text-gray-200 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 border border-gray-400/20 rounded-lg pointer-events-none"></div>
                           <span className="text-xs z-10 relative">View Profile</span>
                         </button>
-                        
+
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-blue-600/40 hover:bg-blue-500/50 border-none rounded-lg text-blue-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                           <div className="absolute inset-0 border border-blue-400/20 rounded-lg pointer-events-none"></div>
-                          <span className="text-xs z-10 relative">{completion.isSubscribed ? "Subscribed" : "Buy SoulCoin"}</span>
+                          <span className="text-xs z-10 relative">
+                            {completion.isSubscribed ? "Subscribed" : "Buy SoulCoin"}
+                          </span>
                         </button>
-                        
+
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-green-600/40 hover:bg-green-500/50 border-none rounded-lg text-green-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 border border-green-400/20 rounded-lg pointer-events-none"></div>
                           <span className="text-xs z-10 relative">Tip</span>
@@ -139,7 +144,7 @@ export const CommunityShowcase = () => {
             ))}
           </div>
         );
-        
+
       case "trending":
         return (
           <div className="space-y-5">
@@ -148,15 +153,18 @@ export const CommunityShowcase = () => {
                 <div className="relative rounded-2xl hover:scale-[1.01] transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
                   <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-                  
+
                   <div className="relative p-6 z-10 backdrop-blur-sm">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                       <div>
                         <h3 className="text-lg font-bold text-white">{creator.username}</h3>
-                        
+
                         <div className="flex flex-wrap gap-1.5 mt-2 mb-2">
                           {creator.skills.map((skill, index) => (
-                            <span key={index} className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs py-1">
+                            <span
+                              key={index}
+                              className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs py-1"
+                            >
                               {skill}
                             </span>
                           ))}
@@ -164,7 +172,7 @@ export const CommunityShowcase = () => {
                             {creator.category}
                           </span>
                         </div>
-                        
+
                         <div className="flex gap-3 text-xs mt-1">
                           <span className="text-purple-200">
                             <span className="font-semibold text-white">{creator.completedTasks}</span> Tasks
@@ -174,17 +182,19 @@ export const CommunityShowcase = () => {
                           </span>
                         </div>
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-gray-800/40 hover:bg-gray-700/50 border-none rounded-lg text-gray-200 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 border border-gray-400/20 rounded-lg pointer-events-none"></div>
                           <span className="text-xs z-10 relative">View Profile</span>
                         </button>
-                        
+
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-blue-600/40 hover:bg-blue-500/50 border-none rounded-lg text-blue-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                           <div className="absolute inset-0 border border-blue-400/20 rounded-lg pointer-events-none"></div>
-                          <span className="text-xs z-10 relative">{creator.isSubscribed ? "Subscribed" : "Subscribe"}</span>
+                          <span className="text-xs z-10 relative">
+                            {creator.isSubscribed ? "Subscribed" : "Subscribe"}
+                          </span>
                         </button>
                       </div>
                     </div>
@@ -194,13 +204,13 @@ export const CommunityShowcase = () => {
             ))}
           </div>
         );
-        
+
       case "subscriptions":
         return mySubscriptions.length === 0 ? (
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
             <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-            
+
             <div className="relative p-8 z-10 backdrop-blur-sm text-center">
               <p className="text-gray-300 mb-4">You haven't subscribed to any creators yet.</p>
               <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-4 py-2 transition-all duration-300 backdrop-blur-sm">
@@ -217,15 +227,18 @@ export const CommunityShowcase = () => {
                 <div className="relative rounded-2xl hover:scale-[1.01] transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
                   <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-                  
+
                   <div className="relative p-6 z-10 backdrop-blur-sm">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                       <div>
                         <h3 className="text-lg font-bold text-white">{creator.username}</h3>
-                        
+
                         <div className="flex flex-wrap gap-1.5 mt-2 mb-2">
                           {creator.skills.map((skill, index) => (
-                            <span key={index} className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs py-1">
+                            <span
+                              key={index}
+                              className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs py-1"
+                            >
                               {skill}
                             </span>
                           ))}
@@ -233,7 +246,7 @@ export const CommunityShowcase = () => {
                             {creator.category}
                           </span>
                         </div>
-                        
+
                         <div className="flex gap-3 text-xs mt-1">
                           <span className="text-purple-200">
                             <span className="font-semibold text-white">{creator.completedTasks}</span> Tasks
@@ -243,14 +256,14 @@ export const CommunityShowcase = () => {
                           </span>
                         </div>
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                           <div className="absolute inset-0 border border-purple-400/20 rounded-lg pointer-events-none"></div>
                           <span className="text-xs z-10 relative">View Latest Work</span>
                         </button>
-                        
+
                         <button className="btn btn-sm relative overflow-hidden group/btn bg-gray-800/40 hover:bg-gray-700/50 border-none rounded-lg text-gray-200 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
                           <div className="absolute inset-0 border border-gray-400/20 rounded-lg pointer-events-none"></div>
                           <span className="text-xs z-10 relative">Manage Subscription</span>
@@ -263,7 +276,7 @@ export const CommunityShowcase = () => {
             ))}
           </div>
         );
-        
+
       default:
         return null;
     }
@@ -273,7 +286,7 @@ export const CommunityShowcase = () => {
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-base-300/10 to-base-300/5">
       {/* 深色背景覆盖 */}
       <div className="fixed inset-0 bg-black/80 -z-10"></div>
-      
+
       {/* SVG Background with better patterns */}
       <div className="fixed top-0 left-0 w-full h-full -z-5 opacity-10">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -297,7 +310,7 @@ export const CommunityShowcase = () => {
           <rect width="100%" height="100%" fill="currentColor" mask="url(#gridMask)" opacity="0.2" />
         </svg>
       </div>
-      
+
       {/* 顶部装饰光效 */}
       <div className="fixed top-0 left-[10%] w-[35%] h-[40vh] bg-purple-600/20 blur-[120px] rounded-full -z-1"></div>
       <div className="fixed top-[20%] right-[10%] w-[25%] h-[30vh] bg-blue-600/20 blur-[100px] rounded-full -z-1"></div>
@@ -309,37 +322,37 @@ export const CommunityShowcase = () => {
             Community Showcase
           </span>
         </h1>
-        
+
         {/* Tabs */}
         <div className="relative py-2 px-1 rounded-xl mb-6 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/60 to-purple-900/20 rounded-xl"></div>
           <div className="absolute inset-0 border border-purple-500/20 rounded-xl"></div>
-          
+
           <div className="relative z-10 flex flex-wrap justify-center gap-2 backdrop-blur-sm py-1">
-            <button 
+            <button
               className={`px-4 py-2 rounded-lg text-sm transition-all ${
-                activeTab === "latest" 
-                  ? "bg-purple-600/40 text-white font-medium" 
+                activeTab === "latest"
+                  ? "bg-purple-600/40 text-white font-medium"
                   : "bg-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/30"
               }`}
               onClick={() => setActiveTab("latest")}
             >
               Latest Completions
             </button>
-            <button 
+            <button
               className={`px-4 py-2 rounded-lg text-sm transition-all ${
-                activeTab === "trending" 
-                  ? "bg-purple-600/40 text-white font-medium" 
+                activeTab === "trending"
+                  ? "bg-purple-600/40 text-white font-medium"
                   : "bg-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/30"
               }`}
               onClick={() => setActiveTab("trending")}
             >
               Trending Creators
             </button>
-            <button 
+            <button
               className={`px-4 py-2 rounded-lg text-sm transition-all ${
-                activeTab === "subscriptions" 
-                  ? "bg-purple-600/40 text-white font-medium" 
+                activeTab === "subscriptions"
+                  ? "bg-purple-600/40 text-white font-medium"
                   : "bg-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/30"
               }`}
               onClick={() => setActiveTab("subscriptions")}
@@ -348,10 +361,10 @@ export const CommunityShowcase = () => {
             </button>
           </div>
         </div>
-        
+
         {/* Tab Content */}
         {renderTabContent()}
       </div>
     </div>
   );
-}; 
+};

@@ -1,39 +1,36 @@
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         // 亮模式颜色
         primary: {
-          DEFAULT: '#4F46E5', // 主题色（亮模式）
+          DEFAULT: "#4F46E5", // 主题色（亮模式）
         },
         secondary: {
-          DEFAULT: '#06B6D4', // 次要色（亮模式）
+          DEFAULT: "#06B6D4", // 次要色（亮模式）
         },
         accent: {
-          DEFAULT: '#10B981', // 强调色（亮模式）
+          DEFAULT: "#10B981", // 强调色（亮模式）
         },
         // 暗模式颜色将通过CSS变量实现
-        'neon-volt': '#8B5CF6', // 主题色（暗模式）
-        'plasma-bolt': '#3B82F6', // 次要色（暗模式）
-        'neo-green': '#14F195', // 霓虹绿色（暗模式）
-        
+        "neon-volt": "#8B5CF6", // 主题色（暗模式）
+        "plasma-bolt": "#3B82F6", // 次要色（暗模式）
+        "neo-green": "#14F195", // 霓虹绿色（暗模式）
+
         // 背景色
         light: {
-          bg: '#F8FAFC', // 亮模式浅灰背景
+          bg: "#F8FAFC", // 亮模式浅灰背景
         },
         dark: {
-          bg: '#0F172A', // 暗模式深蓝黑色
-          secondary: '#1E293B', // 暗蓝灰
+          bg: "#0F172A", // 暗模式深蓝黑色
+          secondary: "#1E293B", // 暗蓝灰
         },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, var(--neon-volt), #1e90ff)',
-        'gradient-secondary': 'linear-gradient(135deg, var(--plasma-bolt), #ff8c00)',
-        'gradient-text': 'linear-gradient(to right, var(--tw-gradient-stops))',
+        "gradient-primary": "linear-gradient(135deg, var(--neon-volt), #1e90ff)",
+        "gradient-secondary": "linear-gradient(135deg, var(--plasma-bolt), #ff8c00)",
+        "gradient-text": "linear-gradient(to right, var(--tw-gradient-stops))",
       },
     },
   },
@@ -62,4 +59,4 @@ module.exports = {
       },
     ],
   },
-}; 
+};

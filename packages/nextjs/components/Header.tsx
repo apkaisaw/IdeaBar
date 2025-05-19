@@ -5,24 +5,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { Address, FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 import { useAccount } from "wagmi";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { useOutsideClick, useTargetNetwork } from "~~/hooks/scaffold-eth";
 
 // 用户信息组件
 export const HeaderUserInfo = () => {
-  const { address } = useAccount();
-
   // 只在仪表盘相关路径显示
   const pathname = usePathname();
-  if (!pathname.startsWith("/overview") && 
-      !pathname.includes("/chat") && 
-      !pathname.includes("/tasks") && 
-      !pathname.includes("/community") && 
-      !pathname.includes("/profile") && 
-      !pathname.includes("/upgrade") && 
-      !pathname.includes("/settings")) {
+  if (
+    !pathname.startsWith("/overview") &&
+    !pathname.includes("/chat") &&
+    !pathname.includes("/tasks") &&
+    !pathname.includes("/community") &&
+    !pathname.includes("/profile") &&
+    !pathname.includes("/upgrade") &&
+    !pathname.includes("/settings")
+  ) {
     return null;
   }
 

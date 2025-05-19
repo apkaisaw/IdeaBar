@@ -49,24 +49,24 @@ export const AddressInfoDropdown = ({
   // 紫色半透明主题样式
   const purpleStyle = {
     summary: {
-      backgroundColor: 'rgba(123, 63, 228, 0.7)',
-      borderColor: 'rgba(147, 87, 252, 0.5)',
-      boxShadow: '0 4px 6px rgba(123, 63, 228, 0.2)'
+      backgroundColor: "rgba(123, 63, 228, 0.7)",
+      borderColor: "rgba(147, 87, 252, 0.5)",
+      boxShadow: "0 4px 6px rgba(123, 63, 228, 0.2)",
     },
     dropdownContent: {
-      backgroundColor: 'rgba(30, 10, 60, 0.85)',
-      backdropFilter: 'blur(8px)',
-      border: '1px solid rgba(147, 87, 252, 0.3)'
+      backgroundColor: "rgba(30, 10, 60, 0.85)",
+      backdropFilter: "blur(8px)",
+      border: "1px solid rgba(147, 87, 252, 0.3)",
     },
     menuItem: {
-      hoverBg: 'rgba(147, 87, 252, 0.2)'
-    }
+      hoverBg: "rgba(147, 87, 252, 0.2)",
+    },
   };
 
   return (
     <>
       <details ref={dropdownRef} className="dropdown dropdown-end leading-3">
-        <summary 
+        <summary
           className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md dropdown-toggle gap-0 h-auto! backdrop-blur-sm"
           style={purpleStyle.summary}
         >
@@ -76,7 +76,7 @@ export const AddressInfoDropdown = ({
           </span>
           <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
         </summary>
-        <ul 
+        <ul
           className="dropdown-content menu z-2 p-2 mt-2 shadow-center shadow-accent rounded-box gap-1"
           style={purpleStyle.dropdownContent}
         >

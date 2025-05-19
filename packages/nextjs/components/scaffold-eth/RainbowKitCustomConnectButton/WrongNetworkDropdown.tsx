@@ -8,21 +8,21 @@ export const WrongNetworkDropdown = () => {
   // 紫色半透明主题样式
   const purpleStyle = {
     button: {
-      backgroundColor: 'rgba(255, 99, 132, 0.7)', // 错误状态使用红色半透明背景
-      borderColor: 'rgba(255, 120, 150, 0.5)',
-      boxShadow: '0 4px 6px rgba(255, 99, 132, 0.2)'
+      backgroundColor: "rgba(255, 99, 132, 0.7)", // 错误状态使用红色半透明背景
+      borderColor: "rgba(255, 120, 150, 0.5)",
+      boxShadow: "0 4px 6px rgba(255, 99, 132, 0.2)",
     },
     dropdownContent: {
-      backgroundColor: 'rgba(30, 10, 60, 0.85)', 
-      backdropFilter: 'blur(8px)',
-      border: '1px solid rgba(147, 87, 252, 0.3)'
-    }
+      backgroundColor: "rgba(30, 10, 60, 0.85)",
+      backdropFilter: "blur(8px)",
+      border: "1px solid rgba(147, 87, 252, 0.3)",
+    },
   };
 
   return (
     <div className="dropdown dropdown-end mr-2">
-      <label 
-        tabIndex={0} 
+      <label
+        tabIndex={0}
         className="btn btn-error btn-sm dropdown-toggle gap-1 backdrop-blur-sm"
         style={purpleStyle.button}
       >

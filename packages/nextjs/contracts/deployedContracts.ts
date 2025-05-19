@@ -28,36 +28,36 @@ const deployedContracts: Record<number, AllowedNetwork> = {
               {
                 internalType: "address[]",
                 name: "members",
-                type: "address[]"
+                type: "address[]",
               },
               {
                 internalType: "uint256[]",
                 name: "percentages",
-                type: "uint256[]"
+                type: "uint256[]",
               },
               {
                 internalType: "string",
                 name: "projectName",
-                type: "string"
+                type: "string",
               },
               {
                 internalType: "string",
                 name: "metadataURI",
-                type: "string"
-              }
+                type: "string",
+              },
             ],
             name: "submitSplit",
             outputs: [],
             stateMutability: "nonpayable",
-            type: "function"
+            type: "function",
           },
           {
             inputs: [
               {
                 internalType: "uint256",
                 name: "splitId",
-                type: "uint256"
-              }
+                type: "uint256",
+              },
             ],
             name: "getSplit",
             outputs: [
@@ -66,44 +66,44 @@ const deployedContracts: Record<number, AllowedNetwork> = {
                   {
                     internalType: "address[]",
                     name: "members",
-                    type: "address[]"
+                    type: "address[]",
                   },
                   {
                     internalType: "uint256[]",
                     name: "percentages",
-                    type: "uint256[]"
+                    type: "uint256[]",
                   },
                   {
                     internalType: "string",
                     name: "projectName",
-                    type: "string"
+                    type: "string",
                   },
                   {
                     internalType: "string",
                     name: "metadataURI",
-                    type: "string"
+                    type: "string",
                   },
                   {
                     internalType: "uint256",
                     name: "timestamp",
-                    type: "uint256"
-                  }
+                    type: "uint256",
+                  },
                 ],
                 internalType: "struct IdeaPieSplit.Allocation",
                 name: "",
-                type: "tuple"
-              }
+                type: "tuple",
+              },
             ],
             stateMutability: "view",
-            type: "function"
+            type: "function",
           },
           {
             inputs: [
               {
                 internalType: "bytes32",
                 name: "hash",
-                type: "bytes32"
-              }
+                type: "bytes32",
+              },
             ],
             name: "getSplitByHash",
             outputs: [
@@ -112,36 +112,36 @@ const deployedContracts: Record<number, AllowedNetwork> = {
                   {
                     internalType: "address[]",
                     name: "members",
-                    type: "address[]"
+                    type: "address[]",
                   },
                   {
                     internalType: "uint256[]",
                     name: "percentages",
-                    type: "uint256[]"
+                    type: "uint256[]",
                   },
                   {
                     internalType: "string",
                     name: "projectName",
-                    type: "string"
+                    type: "string",
                   },
                   {
                     internalType: "string",
                     name: "metadataURI",
-                    type: "string"
+                    type: "string",
                   },
                   {
                     internalType: "uint256",
                     name: "timestamp",
-                    type: "uint256"
-                  }
+                    type: "uint256",
+                  },
                 ],
                 internalType: "struct IdeaPieSplit.Allocation",
                 name: "",
-                type: "tuple"
-              }
+                type: "tuple",
+              },
             ],
             stateMutability: "view",
-            type: "function"
+            type: "function",
           },
           {
             inputs: [],
@@ -150,11 +150,11 @@ const deployedContracts: Record<number, AllowedNetwork> = {
               {
                 internalType: "uint256",
                 name: "",
-                type: "uint256"
-              }
+                type: "uint256",
+              },
             ],
             stateMutability: "view",
-            type: "function"
+            type: "function",
           },
           {
             anonymous: false,
@@ -163,34 +163,34 @@ const deployedContracts: Record<number, AllowedNetwork> = {
                 indexed: true,
                 internalType: "uint256",
                 name: "splitId",
-                type: "uint256"
+                type: "uint256",
               },
               {
                 indexed: false,
                 internalType: "string",
                 name: "projectName",
-                type: "string"
+                type: "string",
               },
               {
                 indexed: true,
                 internalType: "address",
                 name: "submitter",
-                type: "address"
+                type: "address",
               },
               {
                 indexed: false,
                 internalType: "uint256",
                 name: "timestamp",
-                type: "uint256"
-              }
+                type: "uint256",
+              },
             ],
             name: "SplitRecorded",
-            type: "event"
-          }
-        ]
-      }
-    }
-  }
+            type: "event",
+          },
+        ],
+      },
+    },
+  },
 };
 
 export default deployedContracts;

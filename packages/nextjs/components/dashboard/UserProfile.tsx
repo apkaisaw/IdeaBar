@@ -1,11 +1,11 @@
 "use client";
 
-import { Address } from "~~/components/scaffold-eth";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 
 export const UserProfile = () => {
   const { address } = useAccount();
-  
+
   // Mock user data
   const userData = {
     username: "@Blockchain_Builder",
@@ -21,7 +21,7 @@ export const UserProfile = () => {
         description: "A complete dashboard for tracking DeFi investments and yield farming.",
         imageUrl: "https://placehold.co/600x400/png",
         link: "#",
-        category: "Development"
+        category: "Development",
       },
       {
         id: 2,
@@ -29,7 +29,7 @@ export const UserProfile = () => {
         description: "A generative art NFT collection with 5,000 unique items.",
         imageUrl: "https://placehold.co/600x400/png",
         link: "#",
-        category: "Art"
+        category: "Art",
       },
       {
         id: 3,
@@ -37,16 +37,16 @@ export const UserProfile = () => {
         description: "Performed security audits for 10+ projects in the ecosystem.",
         imageUrl: "https://placehold.co/600x400/png",
         link: "#",
-        category: "Security"
+        category: "Security",
       },
     ],
   };
-  
+
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-base-300/10 to-base-300/5">
       {/* 深色背景覆盖 */}
       <div className="fixed inset-0 bg-black/80 -z-10"></div>
-      
+
       {/* SVG Background with better patterns */}
       <div className="fixed top-0 left-0 w-full h-full -z-5 opacity-10">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@ export const UserProfile = () => {
           <rect width="100%" height="100%" fill="currentColor" mask="url(#gridMask)" opacity="0.2" />
         </svg>
       </div>
-      
+
       {/* 顶部装饰光效 */}
       <div className="fixed top-0 left-[10%] w-[35%] h-[40vh] bg-purple-600/20 blur-[120px] rounded-full -z-1"></div>
       <div className="fixed top-[20%] right-[10%] w-[25%] h-[30vh] bg-blue-600/20 blur-[100px] rounded-full -z-1"></div>
@@ -82,13 +82,13 @@ export const UserProfile = () => {
             My Profile
           </span>
         </h1>
-        
+
         {/* Profile Header */}
         <section className="mb-8">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
             <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-            
+
             <div className="relative p-6 z-10 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
                 {/* Avatar & Basic Info */}
@@ -105,11 +105,11 @@ export const UserProfile = () => {
                     <Address address={address} />
                   </div>
                 </div>
-                
+
                 {/* Stats & Bio */}
                 <div className="flex-1">
                   <p className="text-gray-300 mb-6">{userData.bio}</p>
-                  
+
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="relative group">
                       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-purple-800/40 to-purple-900/30 rounded-xl"></div>
@@ -120,7 +120,7 @@ export const UserProfile = () => {
                         <div className="text-xs text-blue-200">Top 5%</div>
                       </div>
                     </div>
-                    
+
                     <div className="relative group">
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-blue-800/40 to-blue-900/30 rounded-xl"></div>
                       <div className="absolute inset-0 border border-blue-500/20 rounded-xl"></div>
@@ -130,7 +130,7 @@ export const UserProfile = () => {
                         <div className="text-xs text-blue-200">Last month: +5</div>
                       </div>
                     </div>
-                    
+
                     <div className="relative group">
                       <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-indigo-800/40 to-indigo-900/30 rounded-xl"></div>
                       <div className="absolute inset-0 border border-indigo-500/20 rounded-xl"></div>
@@ -146,18 +146,21 @@ export const UserProfile = () => {
             </div>
           </div>
         </section>
-        
+
         {/* Skills */}
         <section className="mb-8">
           <h2 className="text-xl font-bold mb-4 text-purple-200">Skills & Expertise</h2>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
             <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-            
+
             <div className="relative p-6 z-10 backdrop-blur-sm">
               <div className="flex flex-wrap gap-2">
                 {userData.skills.map((skill, index) => (
-                  <span key={index} className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs px-3 py-2 border-purple-500/20">
+                  <span
+                    key={index}
+                    className="badge badge-sm bg-purple-600/30 text-purple-100 backdrop-blur-sm text-xs px-3 py-2 border-purple-500/20"
+                  >
                     {skill}
                   </span>
                 ))}
@@ -168,7 +171,7 @@ export const UserProfile = () => {
             </div>
           </div>
         </section>
-        
+
         {/* Portfolio */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-4">
@@ -179,21 +182,17 @@ export const UserProfile = () => {
               <span className="text-xs z-10 relative">Add New Item</span>
             </button>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {userData.portfolioItems.map(item => (
               <div key={item.id} className="group">
                 <div className="relative card h-full hover:scale-[1.02] transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
                   <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-                  
+
                   <div className="relative z-10">
                     <figure className="px-3 pt-3">
-                      <img 
-                        src={item.imageUrl} 
-                        alt={item.title} 
-                        className="rounded-xl h-48 w-full object-cover" 
-                      />
+                      <img src={item.imageUrl} alt={item.title} className="rounded-xl h-48 w-full object-cover" />
                     </figure>
                     <div className="card-body p-5">
                       <div className="flex justify-between items-start mb-1">
@@ -204,8 +203,8 @@ export const UserProfile = () => {
                       </div>
                       <p className="text-gray-300 text-sm mb-4">{item.description}</p>
                       <div className="card-actions justify-end">
-                        <a 
-                          href={item.link} 
+                        <a
+                          href={item.link}
                           className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm"
                         >
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
@@ -220,19 +219,32 @@ export const UserProfile = () => {
             ))}
           </div>
         </section>
-        
+
         {/* Connected Accounts */}
         <section>
           <h2 className="text-xl font-bold mb-4 text-purple-200">Connected Accounts</h2>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-purple-900/10 rounded-2xl"></div>
             <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
-            
+
             <div className="relative p-6 z-10 backdrop-blur-sm">
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-gray-300"
+                    >
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
                     <span className="text-gray-200">GitHub</span>
                   </div>
                   <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
@@ -240,20 +252,48 @@ export const UserProfile = () => {
                     <span className="text-xs z-10 relative">Connect</span>
                   </button>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-gray-300"
+                    >
+                      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                    </svg>
                     <span className="text-gray-200">Twitter/X</span>
                   </div>
                   <div className="badge badge-sm bg-green-600/40 text-green-100 backdrop-blur-sm px-3 py-2 border border-green-500/20">
                     Connected
                   </div>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-gray-300"
+                    >
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
                     <span className="text-gray-200">LinkedIn</span>
                   </div>
                   <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-3 py-2 transition-all duration-300 backdrop-blur-sm">
@@ -268,4 +308,4 @@ export const UserProfile = () => {
       </div>
     </div>
   );
-}; 
+};

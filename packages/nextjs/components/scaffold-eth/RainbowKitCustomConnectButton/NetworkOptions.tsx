@@ -18,9 +18,9 @@ export const NetworkOptions = ({ hidden = false }: NetworkOptionsProps) => {
 
   // 紫色半透明按钮样式
   const purpleButtonStyle = {
-    backgroundColor: 'rgba(123, 63, 228, 0.1)', // 非常轻微的紫色背景，避免干扰hover效果
-    border: '1px solid rgba(147, 87, 252, 0.2)',
-    transition: 'all 0.2s ease',
+    backgroundColor: "rgba(123, 63, 228, 0.1)", // 非常轻微的紫色背景，避免干扰hover效果
+    border: "1px solid rgba(147, 87, 252, 0.2)",
+    transition: "all 0.2s ease",
     // hover效果在className中通过hover:bg-opacity添加
   };
 

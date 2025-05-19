@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Iceland';
-  src: url('/fonts/Iceland-Regular.ttf') format('truetype');
+  font-family: "Iceland";
+  src: url("/fonts/Iceland-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -15,24 +15,24 @@
 
 :root {
   /* 亮模式下的颜色变量 */
-  --primary: #4F46E5;
-  --secondary: #06B6D4;
-  --accent: #10B981;
-  --bg-light: #F8FAFC;
-  
+  --primary: #4f46e5;
+  --secondary: #06b6d4;
+  --accent: #10b981;
+  --bg-light: #f8fafc;
+
   /* 渐变色变量 */
-  --neon-volt: #8B5CF6;
-  --plasma-bolt: #3B82F6;
-  --neo-green: #14F195;
+  --neon-volt: #8b5cf6;
+  --plasma-bolt: #3b82f6;
+  --neo-green: #14f195;
 }
 
 [data-theme="dark"] {
   /* 暗模式下的颜色变量 */
-  --primary: #8B5CF6;
-  --secondary: #3B82F6;
-  --accent: #14F195;
-  --bg-dark: #0F172A;
-  --bg-dark-secondary: #1E293B;
+  --primary: #8b5cf6;
+  --secondary: #3b82f6;
+  --accent: #14f195;
+  --bg-dark: #0f172a;
+  --bg-dark-secondary: #1e293b;
 }
 
 @plugin "daisyui" {
@@ -121,7 +121,7 @@
 
   body {
     min-height: 100vh;
-    font-family: 'Iceland', sans-serif;
+    font-family: "Iceland", sans-serif;
     font-size: 1.25rem;
   }
 
@@ -131,19 +131,29 @@
   h4 {
     margin-bottom: 0.5rem;
     line-height: 1;
-    font-family: 'Iceland', sans-serif;
+    font-family: "Iceland", sans-serif;
   }
 
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.75rem; }
-  h4 { font-size: 1.5rem; }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+  }
 
   .btn {
     font-size: 1.2rem;
   }
 
-  input, select, textarea {
+  input,
+  select,
+  textarea {
     font-size: 1.2rem;
   }
 
@@ -151,7 +161,9 @@
     font-size: 1.2rem;
   }
 
-  table, th, td {
+  table,
+  th,
+  td {
     font-size: 1.2rem;
   }
 
@@ -159,19 +171,24 @@
     font-size: 1.2rem;
   }
 
-  small, .text-sm {
+  small,
+  .text-sm {
     font-size: 1rem;
   }
 
-  code, pre {
+  code,
+  pre {
     font-size: 1.15rem;
   }
 
-  .card, .card-body, .card-title, .card-actions {
+  .card,
+  .card-body,
+  .card-title,
+  .card-actions {
     font-size: 1.2rem;
   }
 
-  .card .text-xs, 
+  .card .text-xs,
   .card .text-sm,
   .card .text-base,
   .card span,
@@ -191,15 +208,28 @@
     font-size: 1rem;
   }
 
-  .text-xs { font-size: 1rem !important; }
-  .text-sm { font-size: 1.1rem !important; }
-  .text-base { font-size: 1.2rem !important; }
-  .text-lg { font-size: 1.3rem !important; }
-  .text-xl { font-size: 1.5rem !important; }
-  .text-2xl { font-size: 1.7rem !important; }
-  
+  .text-xs {
+    font-size: 1rem !important;
+  }
+  .text-sm {
+    font-size: 1.1rem !important;
+  }
+  .text-base {
+    font-size: 1.2rem !important;
+  }
+  .text-lg {
+    font-size: 1.3rem !important;
+  }
+  .text-xl {
+    font-size: 1.5rem !important;
+  }
+  .text-2xl {
+    font-size: 1.7rem !important;
+  }
+
   /* 页脚文本大小特殊调整 */
-  footer, footer * {
+  footer,
+  footer * {
     font-size: 0.85rem !important;
   }
 }
