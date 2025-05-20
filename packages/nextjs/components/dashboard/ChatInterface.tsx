@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
 
 // 工具调用类型定义
 type ToolType =
@@ -56,7 +55,7 @@ export const ChatInterface = () => {
     skills: string[];
     creator: string;
   } | null>(null);
-  const [conversations, setConversations] = useState<{ [key: string]: BotMessage[] }>({});
+  const [conversations, setConversations] = useState<Record<string, BotMessage[]>>({});
 
   // 工具定义
   const tools: Tool[] = [
@@ -125,7 +124,7 @@ export const ChatInterface = () => {
     {
       address: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
       name: "Sam Wilson",
-      lastMessage: "I'll review your proposal",
+      lastMessage: "I&apos;ll review your proposal",
       unread: 0,
       avatar: "https://api.dicebear.com/6.x/avataaars/svg?seed=Sam",
       status: "away",
@@ -150,85 +149,91 @@ export const ChatInterface = () => {
     status: "online",
   };
 
-  // IdeaBot对话数据 - 初始为空，让用户从头开始对话
-  const ideaBotConversation: BotMessage[] = [
-    {
-      sender: "0xIdeaBot",
-      text: "Hello! I'm IdeaBot. I can help you find suitable tasks based on your skills and market trends, or help you create new tasks.",
-      timestamp: "Just now",
-    },
-  ];
-
   // Mock conversation data - modify to use BotMessage type
-  const conversationsData: { [key: string]: BotMessage[] } = {
+  const conversationsData = useMemo<Record<string, BotMessage[]>>(() => {
+    // IdeaBot初始对话数据
+    const initialIdeaBotConversation: BotMessage[] = [
+      {
+        sender: "0xIdeaBot",
+        text: "Hello! I'm IdeaBot. I can help you find suitable tasks based on your skills and market trends, or help you create new tasks.",
+        timestamp: "Just now",
+      },
+    ];
+    
+    return {
     "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": [
       {
         sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
         text: "Hi, I saw your AI task solution. Can you provide some details on how you implemented it?",
         timestamp: "10:32 AM",
       },
-      {
-        sender: "me",
-        text: "Hey Alex! Sure, I used a transformer-based approach with a custom training dataset.",
-        timestamp: "10:35 AM",
-      },
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "That's interesting. How did you handle the data preprocessing?",
-        timestamp: "10:38 AM",
-      },
-      {
-        sender: "me",
-        text: "I created a pipeline that first cleans the input, removes bias, and then tokenizes everything with BytePair encoding.",
-        timestamp: "10:40 AM",
-      },
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "Great job! I'd like to discuss potential collaboration on a similar project.",
-        timestamp: "10:42 AM",
-      },
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "Thanks for completing the task!",
-        timestamp: "10:45 AM",
-      },
-    ],
-    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": [
-      {
-        sender: "me",
-        text: "Hi Maria, I've completed the initial research for the DeFi project.",
-        timestamp: "Yesterday",
-      },
-      {
-        sender: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-        text: "Thanks for the update. Can you provide more details?",
-        timestamp: "Yesterday",
-      },
-    ],
-    "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC": [
-      { sender: "me", text: "Hello Sam, here's my proposal for the smart contract audit.", timestamp: "Monday" },
-      { sender: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", text: "I'll review your proposal", timestamp: "Monday" },
-    ],
-    "0x90F79bf6EB2c4f870365E785982E1f101E93b906": [
-      {
-        sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-        text: "Just wanted to let you know that the ZK-proof task deadline has been extended by a week.",
-        timestamp: "2 days ago",
-      },
-      { sender: "me", text: "That's great news, thanks for letting me know!", timestamp: "2 days ago" },
-      {
-        sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-        text: "The deadline has been extended",
-        timestamp: "Yesterday",
-      },
-    ],
-    "0xIdeaBot": ideaBotConversation,
-  };
+        {
+          sender: "me",
+          text: "Hey Alex! Sure, I used a transformer-based approach with a custom training dataset.",
+          timestamp: "10:35 AM",
+        },
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "That&apos;s interesting. How did you handle the data preprocessing?",
+          timestamp: "10:38 AM",
+        },
+        {
+          sender: "me",
+          text: "I created a pipeline that first cleans the input, removes bias, and then tokenizes everything with BytePair encoding.",
+          timestamp: "10:40 AM",
+        },
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "Great job! I&apos;d like to discuss potential collaboration on a similar project.",
+          timestamp: "10:42 AM",
+        },
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "Thanks for completing the task!",
+          timestamp: "10:45 AM",
+        },
+      ],
+      "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": [
+        {
+          sender: "me",
+          text: "Hi Maria, I&apos;ve completed the initial research for the DeFi project.",
+          timestamp: "Yesterday",
+        },
+        {
+          sender: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+          text: "Thanks for the update. Can you provide more details?",
+          timestamp: "Yesterday",
+        },
+      ],
+      "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC": [
+        { sender: "me", text: "Hello Sam, here's my proposal for the smart contract audit.", timestamp: "Monday" },
+        {
+          sender: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          text: "I'll review your proposal",
+          timestamp: "Monday",
+        },
+      ],
+      "0x90F79bf6EB2c4f870365E785982E1f101E93b906": [
+        {
+          sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+          text: "Just wanted to let you know that the ZK-proof task deadline has been extended by a week.",
+          timestamp: "2 days ago",
+        },
+        { sender: "me", text: "That&apos;s great news, thanks for letting me know!", timestamp: "2 days ago" },
+        {
+          sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+          text: "The deadline has been extended",
+          timestamp: "Yesterday",
+        },
+      ],
+            "0xIdeaBot": initialIdeaBotConversation,
+    };
+  }, []); // 不需要依赖，因为 initialIdeaBotConversation 现在在回调内部定义
 
   // Mock contract write
-  const { writeContractAsync, isLoading } = useScaffoldWriteContract({
-    contractName: "ChatContract",
-  });
+  // const { writeContractAsync } = useScaffoldWriteContract({
+  //   contractName: "ChatContract",
+  // });
 
   const handleSendMessage = async () => {
     if (!message.trim()) {
@@ -1248,7 +1253,7 @@ export const ChatInterface = () => {
   // 初始化对话数据
   useEffect(() => {
     setConversations(conversationsData);
-  }, []);
+  }, [conversationsData]);
 
   useEffect(() => {
     scrollToBottom();
@@ -1458,9 +1463,11 @@ export const ChatInterface = () => {
                       >
                         <div className="flex items-start gap-3">
                           <div className="relative">
-                            <img
+                            <Image
                               src={ideaBot.avatar}
                               alt={ideaBot.name}
+                              width={40}
+                              height={40}
                               className="w-10 h-10 rounded-full bg-gray-700"
                             />
                             <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-gray-800 bg-green-500"></div>
@@ -1498,9 +1505,11 @@ export const ChatInterface = () => {
                         >
                           <div className="flex items-start gap-3">
                             <div className="relative">
-                              <img
+                              <Image
                                 src={contact.avatar}
                                 alt={contact.name}
+                                width={40}
+                                height={40}
                                 className="w-10 h-10 rounded-full bg-gray-700"
                               />
                               <div
@@ -1554,17 +1563,19 @@ export const ChatInterface = () => {
               {/* Chat Header */}
               <div className="relative z-10 p-3 border-b border-indigo-500/20 backdrop-blur-sm flex-shrink-0">
                 <div className="flex items-center gap-3">
-                  <img
+                  <Image
                     src={
                       selectedContact === "0xIdeaBot"
                         ? ideaBot.avatar
-                        : contacts.find(c => c.address === selectedContact)?.avatar
+                        : contacts.find(c => c.address === selectedContact)?.avatar || ""
                     }
                     alt={
                       selectedContact === "0xIdeaBot"
                         ? ideaBot.name
-                        : contacts.find(c => c.address === selectedContact)?.name
+                        : contacts.find(c => c.address === selectedContact)?.name || ""
                     }
+                    width={40}
+                    height={40}
                     className="w-10 h-10 rounded-full bg-gray-700"
                   />
                   <div className="flex-1">
@@ -1600,12 +1611,9 @@ export const ChatInterface = () => {
                                 : "Offline"}
                           </span>
                           <span className="text-gray-500 mx-1">•</span>
-                          <Address
-                            address={selectedContact}
-                            size="xs"
-                            format="short"
-                            className="text-xs text-gray-400"
-                          />
+                          <span className="text-xs text-gray-400">
+                            <Address address={selectedContact} size="xs" format="short" />
+                          </span>
                         </>
                       )}
                     </div>
@@ -1676,13 +1684,15 @@ export const ChatInterface = () => {
                           idx > 0 &&
                           conversations[selectedContact][idx - 1].sender !== msg.sender && (
                             <div className="absolute -left-12 top-1">
-                              <img
+                              <Image
                                 src={
                                   selectedContact === "0xIdeaBot"
                                     ? ideaBot.avatar
-                                    : contacts.find(c => c.address === selectedContact)?.avatar
+                                    : contacts.find(c => c.address === selectedContact)?.avatar || ""
                                 }
                                 alt="avatar"
+                                width={32}
+                                height={32}
                                 className="w-8 h-8 rounded-full bg-gray-700"
                               />
                             </div>
@@ -1991,7 +2001,7 @@ export const ChatInterface = () => {
                     type="button"
                     onClick={handleSendMessage}
                     className={`p-2 ${selectedContact === "0xIdeaBot" ? "bg-cyan-600/60 hover:bg-cyan-500/70" : "bg-indigo-600/60 hover:bg-indigo-500/70"} text-white rounded-lg transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group/btn`}
-                    disabled={isLoading || !message.trim()}
+                    disabled={!message.trim()}
                   >
                     <div
                       className={`absolute inset-0 ${selectedContact === "0xIdeaBot" ? "bg-gradient-to-r from-cyan-600/40 to-blue-600/40" : "bg-gradient-to-r from-indigo-600/40 to-blue-600/40"} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`}

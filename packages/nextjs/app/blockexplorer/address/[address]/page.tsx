@@ -2,12 +2,12 @@ import fs from "fs";
 import path from "path";
 import { foundry } from "viem/chains";
 import { AddressComponent } from "~~/app/blockexplorer/_components/AddressComponent";
-import deployedContracts from "~~/contracts/deployedContracts";
 import { isZeroAddress } from "~~/utils/scaffold-eth/common";
-import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
+import { contracts } from "~~/utils/scaffold-eth/contract";
 
 type PageProps = {
   params: Promise<{ address: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 async function fetchByteCodeAndAssembly(buildInfoDirectory: string, contractPath: string) {
@@ -37,7 +37,6 @@ async function fetchByteCodeAndAssembly(buildInfoDirectory: string, contractPath
 }
 
 const getContractData = async (address: string) => {
-  const contracts = deployedContracts as GenericContractsDeclaration | null;
   const chainId = foundry.id;
   let contractPath = "";
 
@@ -84,11 +83,11 @@ export function generateStaticParams() {
 
 const AddressPage = async (props: PageProps) => {
   const params = await props.params;
-  const address = params?.address as string;
+  const address = params.address;
 
   if (isZeroAddress(address)) return null;
 
-  const contractData: { bytecode: string; assembly: string } | null = await getContractData(address);
+  const contractData = await getContractData(address);
   return <AddressComponent address={address} contractData={contractData} />;
 };
 

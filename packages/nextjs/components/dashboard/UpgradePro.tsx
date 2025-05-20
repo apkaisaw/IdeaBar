@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
 
 export const UpgradePro = () => {
-  const [selectedPlan, setSelectedPlan] = useState("monthly");
+  const [selectedPlan, setSelectedPlan] = useState<keyof PlansType>("monthly");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Mock data
   const plans = {
@@ -36,23 +37,40 @@ export const UpgradePro = () => {
     },
   };
 
+  // 定义计划类型
+  type PlanType = {
+    price: number;
+    priceUSD: number;
+    period: string;
+    features: string[];
+    popular: boolean;
+  };
+
+  type PlansType = {
+    monthly: PlanType;
+    yearly: PlanType;
+  };
+
   // Mock contract write
-  const { writeContractAsync, isLoading } = useScaffoldWriteContract({
+  const { writeContractAsync } = useScaffoldWriteContract({
     contractName: "YourContract",
   });
 
   const handleUpgrade = async () => {
     try {
+      setIsLoading(true);
       await writeContractAsync({
         functionName: "subscribeToPro",
         args: [selectedPlan === "yearly"],
-        value: 0, // This would be the actual ETH value if needed
+        value: BigInt(0), // This would be the actual ETH value if needed
       });
 
       alert("Subscription successful! Welcome to Pro!");
     } catch (error) {
       console.error("Error upgrading to Pro:", error);
       alert("There was an error processing your subscription. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -186,7 +204,7 @@ export const UpgradePro = () => {
               <button
                 className="btn relative overflow-hidden group/btn bg-purple-600/60 hover:bg-purple-500/70 border-none rounded-lg text-white gap-2 w-full py-3 transition-all duration-300 backdrop-blur-sm"
                 onClick={handleUpgrade}
-                disabled={isLoading}
+                disabled={false}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600/40 to-indigo-600/40 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/0 via-purple-300/30 to-purple-600/0 opacity-0 group-hover/btn:opacity-100 blur-sm transform translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-all duration-1000"></div>

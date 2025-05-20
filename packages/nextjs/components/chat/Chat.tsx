@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth/useScaffoldReadContract";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth/useScaffoldWriteContract";
 
 export const Chat = () => {
   const [message, setMessage] = useState("");
@@ -47,74 +46,81 @@ export const Chat = () => {
   ];
 
   // Mock conversation data
-  const conversations = {
-    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": [
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "Hi, I saw your AI task solution. Can you provide some details on how you implemented it?",
-        timestamp: "10:32 AM",
-      },
-      {
-        sender: "me",
-        text: "Hey Alex! Sure, I used a transformer-based approach with a custom training dataset.",
-        timestamp: "10:35 AM",
-      },
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "That's interesting. How did you handle the data preprocessing?",
-        timestamp: "10:38 AM",
-      },
-      {
-        sender: "me",
-        text: "I created a pipeline that first cleans the input, removes bias, and then tokenizes everything with BytePair encoding.",
-        timestamp: "10:40 AM",
-      },
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "Great job! I'd like to discuss potential collaboration on a similar project.",
-        timestamp: "10:42 AM",
-      },
-      {
-        sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-        text: "Thanks for completing the task!",
-        timestamp: "10:45 AM",
-      },
-    ],
-    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": [
-      {
-        sender: "me",
-        text: "Hi Maria, I've completed the initial research for the DeFi project.",
-        timestamp: "Yesterday",
-      },
-      {
-        sender: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-        text: "Thanks for the update. Can you provide more details?",
-        timestamp: "Yesterday",
-      },
-    ],
-    "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC": [
-      { sender: "me", text: "Hello Sam, here's my proposal for the smart contract audit.", timestamp: "Monday" },
-      { sender: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", text: "I'll review your proposal", timestamp: "Monday" },
-    ],
-    "0x90F79bf6EB2c4f870365E785982E1f101E93b906": [
-      {
-        sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-        text: "Just wanted to let you know that the ZK-proof task deadline has been extended by a week.",
-        timestamp: "2 days ago",
-      },
-      { sender: "me", text: "That's great news, thanks for letting me know!", timestamp: "2 days ago" },
-      {
-        sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-        text: "The deadline has been extended",
-        timestamp: "Yesterday",
-      },
-    ],
-  };
+  const conversations = useMemo<Record<string, Array<{ sender: string; text: string; timestamp: string }>>>(
+    () => ({
+      "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266": [
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "Hi, I saw your AI task solution. Can you provide some details on how you implemented it?",
+          timestamp: "10:32 AM",
+        },
+        {
+          sender: "me",
+          text: "Hey Alex! Sure, I used a transformer-based approach with a custom training dataset.",
+          timestamp: "10:35 AM",
+        },
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "That&apos;s interesting. How did you handle the data preprocessing?",
+          timestamp: "10:38 AM",
+        },
+        {
+          sender: "me",
+          text: "I created a pipeline that first cleans the input, removes bias, and then tokenizes everything with BytePair encoding.",
+          timestamp: "10:40 AM",
+        },
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "Great job! I&apos;d like to discuss potential collaboration on a similar project.",
+          timestamp: "10:42 AM",
+        },
+        {
+          sender: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+          text: "Thanks for completing the task!",
+          timestamp: "10:45 AM",
+        },
+      ],
+      "0x70997970C51812dc3A010C7d01b50e0d17dc79C8": [
+        {
+          sender: "me",
+          text: "Hi Maria, I&apos;ve completed the initial research for the DeFi project.",
+          timestamp: "Yesterday",
+        },
+        {
+          sender: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+          text: "Thanks for the update. Can you provide more details?",
+          timestamp: "Yesterday",
+        },
+      ],
+      "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC": [
+        { sender: "me", text: "Hello Sam, here&apos;s my proposal for the smart contract audit.", timestamp: "Monday" },
+        {
+          sender: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+          text: "I&apos;ll review your proposal",
+          timestamp: "Monday",
+        },
+      ],
+      "0x90F79bf6EB2c4f870365E785982E1f101E93b906": [
+        {
+          sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+          text: "Just wanted to let you know that the ZK-proof task deadline has been extended by a week.",
+          timestamp: "2 days ago",
+        },
+        { sender: "me", text: "That&apos;s great news, thanks for letting me know!", timestamp: "2 days ago" },
+        {
+          sender: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+          text: "The deadline has been extended",
+          timestamp: "Yesterday",
+        },
+      ],
+    }),
+    [],
+  );
 
   // Mock contract write
-  const { writeContractAsync, isLoading } = useScaffoldWriteContract({
-    contractName: "ChatContract",
-  });
+  // const { writeContractAsync } = useScaffoldWriteContract({
+  //   contractName: "ChatContract",
+  // });
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
@@ -239,9 +245,11 @@ export const Chat = () => {
                       >
                         <div className="flex items-start gap-3">
                           <div className="relative">
-                            <img
+                            <Image
                               src={contact.avatar}
                               alt={contact.name}
+                              width={40}
+                              height={40}
                               className="w-10 h-10 rounded-full bg-gray-700"
                             />
                             <div
@@ -295,9 +303,11 @@ export const Chat = () => {
               {/* Chat Header */}
               <div className="relative z-10 p-4 border-b border-indigo-500/20 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={contacts.find(c => c.address === selectedContact)?.avatar}
-                    alt={contacts.find(c => c.address === selectedContact)?.name}
+                  <Image
+                    src={contacts.find(c => c.address === selectedContact)?.avatar || ""}
+                    alt={contacts.find(c => c.address === selectedContact)?.name || ""}
+                    width={40}
+                    height={40}
                     className="w-10 h-10 rounded-full bg-gray-700"
                   />
                   <div className="flex-1">
@@ -322,7 +332,9 @@ export const Chat = () => {
                             : "Offline"}
                       </span>
                       <span className="text-gray-500 mx-1">•</span>
-                      <Address address={selectedContact} size="xs" format="short" className="text-xs text-gray-400" />
+                      <span className="text-xs text-gray-400">
+                        <Address address={selectedContact} size="xs" format="short" />
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -391,9 +403,11 @@ export const Chat = () => {
                           idx > 0 &&
                           conversations[selectedContact][idx - 1].sender !== msg.sender && (
                             <div className="absolute -left-12 top-1">
-                              <img
-                                src={contacts.find(c => c.address === selectedContact)?.avatar}
+                              <Image
+                                src={contacts.find(c => c.address === selectedContact)?.avatar || ""}
                                 alt="avatar"
+                                width={32}
+                                height={32}
                                 className="w-8 h-8 rounded-full bg-gray-700"
                               />
                             </div>
@@ -489,7 +503,7 @@ export const Chat = () => {
                   <button
                     type="submit"
                     className="p-2 bg-indigo-600/60 hover:bg-indigo-500/70 text-white rounded-lg transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group/btn"
-                    disabled={isLoading || !message.trim()}
+                    disabled={!message.trim()}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/40 to-blue-600/40 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative z-10">

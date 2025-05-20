@@ -229,9 +229,9 @@ export const DashboardOverview = () => {
                 <div className="relative z-10 p-5 backdrop-blur-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
                     <span className="font-bold text-purple-200">{highlight.user}</span>
-                    <span className="text-gray-300"> completed "</span>
+                    <span className="text-gray-300"> completed &quot;</span>
                     <span className="text-white">{highlight.task}</span>
-                    <span className="text-gray-300">"</span>
+                    <span className="text-gray-300">&quot;</span>
                     <div className="mt-1">
                       <span className="badge badge-sm bg-blue-600/30 text-blue-100 backdrop-blur-sm text-xs py-1">
                         {highlight.category}

@@ -86,7 +86,7 @@ export const CommunityShowcase = () => {
                   <div className="relative p-6 z-10 backdrop-blur-sm">
                     <div className="flex flex-col md:flex-row justify-between gap-4">
                       <div>
-                        <h3 className="text-lg font-bold text-white">"{completion.title}"</h3>
+                        <h3 className="text-lg font-bold text-white">&quot;{completion.title}&quot;</h3>
                         <p className="text-sm text-purple-200">by {completion.creator}</p>
 
                         <div className="flex flex-wrap gap-1.5 mt-3">
@@ -212,7 +212,7 @@ export const CommunityShowcase = () => {
             <div className="absolute inset-0 border border-purple-500/20 rounded-2xl"></div>
 
             <div className="relative p-8 z-10 backdrop-blur-sm text-center">
-              <p className="text-gray-300 mb-4">You haven't subscribed to any creators yet.</p>
+              <p className="text-gray-300 mb-4">You haven&apos;t subscribed to any creators yet.</p>
               <button className="btn btn-sm relative overflow-hidden group/btn bg-purple-600/40 hover:bg-purple-500/50 border-none rounded-lg text-purple-100 gap-1 px-4 py-2 transition-all duration-300 backdrop-blur-sm">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600/30 to-indigo-600/30 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute inset-0 border border-purple-400/20 rounded-lg pointer-events-none"></div>

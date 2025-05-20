@@ -83,8 +83,7 @@ export const AddressInfoDropdown = ({
           <NetworkOptions hidden={!selectingNetwork} />
           <li className={selectingNetwork ? "hidden" : ""}>
             <div
-              className="h-8 btn-sm rounded-xl! flex gap-3 py-3 cursor-pointer hover:bg-opacity-20"
-              style={{ hover: purpleStyle.menuItem.hoverBg }}
+              className="h-8 btn-sm rounded-xl! flex gap-3 py-3 cursor-pointer hover:bg-opacity-20 hover:bg-purple-500/20"
               onClick={() => copyAddressToClipboard(checkSumAddress)}
             >
               {isAddressCopiedToClipboard ? (

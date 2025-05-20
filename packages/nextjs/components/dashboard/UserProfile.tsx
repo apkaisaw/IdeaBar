@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 
@@ -192,7 +193,13 @@ export const UserProfile = () => {
 
                   <div className="relative z-10">
                     <figure className="px-3 pt-3">
-                      <img src={item.imageUrl} alt={item.title} className="rounded-xl h-48 w-full object-cover" />
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width={400}
+                        height={192}
+                        className="rounded-xl h-48 w-full object-cover"
+                      />
                     </figure>
                     <div className="card-body p-5">
                       <div className="flex justify-between items-start mb-1">
