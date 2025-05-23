@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import { Address } from "~~/components/scaffold-eth";
 
 export const Chat = () => {
@@ -245,7 +244,7 @@ export const Chat = () => {
                       >
                         <div className="flex items-start gap-3">
                           <div className="relative">
-                            <Image
+                            <img
                               src={contact.avatar}
                               alt={contact.name}
                               width={40}
@@ -303,7 +302,7 @@ export const Chat = () => {
               {/* Chat Header */}
               <div className="relative z-10 p-4 border-b border-indigo-500/20 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
-                  <Image
+                  <img
                     src={contacts.find(c => c.address === selectedContact)?.avatar || ""}
                     alt={contacts.find(c => c.address === selectedContact)?.name || ""}
                     width={40}
@@ -403,7 +402,7 @@ export const Chat = () => {
                           idx > 0 &&
                           conversations[selectedContact][idx - 1].sender !== msg.sender && (
                             <div className="absolute -left-12 top-1">
-                              <Image
+                              <img
                                 src={contacts.find(c => c.address === selectedContact)?.avatar || ""}
                                 alt="avatar"
                                 width={32}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import { Address } from "~~/components/scaffold-eth";
 
 // 工具调用类型定义
@@ -1463,7 +1462,7 @@ export const ChatInterface = () => {
                       >
                         <div className="flex items-start gap-3">
                           <div className="relative">
-                            <Image
+                            <img
                               src={ideaBot.avatar}
                               alt={ideaBot.name}
                               width={40}
@@ -1505,7 +1504,7 @@ export const ChatInterface = () => {
                         >
                           <div className="flex items-start gap-3">
                             <div className="relative">
-                              <Image
+                              <img
                                 src={contact.avatar}
                                 alt={contact.name}
                                 width={40}
@@ -1563,7 +1562,7 @@ export const ChatInterface = () => {
               {/* Chat Header */}
               <div className="relative z-10 p-3 border-b border-indigo-500/20 backdrop-blur-sm flex-shrink-0">
                 <div className="flex items-center gap-3">
-                  <Image
+                  <img
                     src={
                       selectedContact === "0xIdeaBot"
                         ? ideaBot.avatar
@@ -1684,7 +1683,7 @@ export const ChatInterface = () => {
                           idx > 0 &&
                           conversations[selectedContact][idx - 1].sender !== msg.sender && (
                             <div className="absolute -left-12 top-1">
-                              <Image
+                              <img
                                 src={
                                   selectedContact === "0xIdeaBot"
                                     ? ideaBot.avatar
