@@ -1,7 +1,7 @@
 # 🍸 Idea Bar
 
 <h4 align="center">
-  AI-Powered Decentralized Creative Task Platform
+  BNB AI Hack Tier 4 | AI-Powered Decentralized Creative Task Platform
 </h4>
 
 ## 🚀 Overview
